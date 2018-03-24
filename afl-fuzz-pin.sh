@@ -34,8 +34,7 @@ while [ '!' "$1" = "--" ]; do
   test "$1" = "-forkserver" && { shift ; AFLPIN="$AFLPIN -forkserver" ; OK=1 ; LOAD=1 ; }
   test "$1" = "-entrypoint" && { shift ; AFLPIN="$AFLPIN -entrypoint $1" ; shift ; OK=1 ; }
   test "$1" = "-exitpoint" && { shift ; AFLPIN="$AFLPIN -exitpoint $1" ; shift ; OK=1 ; }
-  test -z "$OK" && OPS="$OPS $1"
-  shift
+  test -z "$OK" && { OPS="$OPS $1" ; shift ; }
 done
 
 sysctl -w kernel.core_pattern="core"
