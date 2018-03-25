@@ -104,8 +104,10 @@ VOID Image(IMG img, VOID * v) {
 #endif
   
   if (imageload == 0) {
-    exe_start = IMG_LowAddress(img);
-    exe_end = IMG_HighAddress(img);
+    if (libs == 0) {
+      exe_start = IMG_LowAddress(img);
+      exe_end = IMG_HighAddress(img);
+    }
     if (KnobForkserver.Value()) {
       entrypoint = RTN_FindByName(img, KnobEntrypoint.Value().c_str());
       if (entrypoint == RTN_Invalid()) {
@@ -208,7 +210,7 @@ int main(int argc, char *argv[]) {
 
   entrypoint = RTN_Invalid();
   exitpoint = RTN_Invalid();
-  if (libs == 0)
+  if (libs == 0 || KnobForkserver.Value() || KnobExitpoint.Value().length() > 0)
     IMG_AddInstrumentFunction(Image, 0);
 #ifdef DEBUG
   doit = 1;
