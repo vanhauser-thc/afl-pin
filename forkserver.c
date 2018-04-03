@@ -22,6 +22,10 @@ void startForkServer() {
   uint8_t tmp[4];
   int32_t child_pid = 0;
 
+#ifdef DEBUG
+  PRINT_ERROR("starting forkserver\n");
+#endif
+
   if (write(FORKSRV_FD + 1, tmp, 4) != 4) {
     PRINT_ERROR("Error writing fork server\n");
     _exit(1);

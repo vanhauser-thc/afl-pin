@@ -32,6 +32,7 @@ static ADDRINT exe_start = 0, exe_end = 0;
 static map_t prev_id;
 RTN entrypoint, exitpoint;
 static ADDRINT forkserver = 0, exitfunc = 0;
+static bool forkserver_installed = false;
 #ifndef DEBUG
 static uint8_t *trace_bits = NULL;
 #endif
@@ -91,6 +92,12 @@ static VOID Trace(TRACE trace, VOID *v) {
 static void DTearly() { PIN_Detach(); }
 
 static VOID startForkServer(CONTEXT *ctxt, THREADID tid) {
+  if (forkserver_installed == true)
+    return;
+  forkserver_installed = true;
+#ifdef DEBUG
+  fprintf(stderr, "DEBUG: starting forkserver()\n");
+#endif
   PIN_CallApplicationFunction(ctxt, tid, CALLINGSTD_DEFAULT, AFUNPTR(forkserver), NULL, PIN_PARG_END());
 }
 
