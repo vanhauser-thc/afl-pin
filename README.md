@@ -14,7 +14,7 @@ Installation
 Optional: 2. download, compile and install dyninst => https://github.com/dyninst/dyninst
 Optional: 3. download, compile and install afl-dyninst  => https://github.com/vanhauser-thc/afl-dyninst
 4. download and unpack pin => https://software.intel.com/en-us/articles/pintool-downloads (download 3.6)
-5. export PIN_HOME=/path/to/pin directory
+5. export PIN_ROOT=/path/to/pin directory
 6. make a symlink to the afl folder in the afl-pin directory named "afl" , e.g. "ln -s ../afl-2.52b afl"
 7. make
 8. make install

@@ -13,8 +13,9 @@ test -z "$1" -o "$1" = "-h" && {
   exit 1
 }
 
-test -z "$PIN_HOME" && { echo Error: environment variable PIN_HOME is not set ; exit 1 ; }
-test -x "$PIN_HOME/pin" || { echo "Error: environment variable PIN_HOME is not pointing to the build directory (where bin64/drrun is residing)" ; exit 1 ; }
+test -z "$PIN_ROOT" -a -n "$PIN_HOME" && PIN_ROOT=$PIN_HOME
+test -z "$PIN_ROOT" && { echo Error: environment variable PIN_ROOT is not set ; exit 1 ; }
+test -x "$PIN_ROOT/pin" || { echo "Error: environment variable PIN_ROOT is not pointing to the build directory (where the pin binary is residing)" ; exit 1 ; }
 CLIENT=
 test -e ./afl-pin.so && CLIENT=./afl-pin.so 
 test -z "$CLIENT" -a -e "/usr/local/lib/pintool/afl-pin.so" && CLIENT=/usr/local/lib/pintool/afl-pin.so
@@ -48,7 +49,7 @@ export AFL_EXIT_WHEN_DONE=1
 #export AFL_TMPDIR=/run/$$
 #export AFL_PRELOAD=./desock.so:./libdislocator/libdislocator.so
 
-echo Running: afl-fuzz -m $AFL_MEM $OPS -- $PIN_HOME/pin -t "$CLIENT" $AFLPIN $*
+echo Running: afl-fuzz -m $AFL_MEM $OPS -- $PIN_ROOT/pin -t "$CLIENT" $AFLPIN $*
 sleep 1
 test -n "$LOAD" && export PIN_APP_LD_PRELOAD=/usr/local/lib/pintool/forkserver.so
-afl-fuzz -m $AFL_MEM $OPS -- $PIN_HOME/pin -t "$CLIENT" $AFLPIN $*
+afl-fuzz -m $AFL_MEM $OPS -- $PIN_ROOT/pin -t "$CLIENT" $AFLPIN $*
