@@ -9,7 +9,12 @@ test -z "$1" -o "$1" = "-h" && {
   echo "  \"afl-dyninst -i program -o program_inst -D\""
   echo or use the option -forkserver which will will implement a fork server
   echo "in main(). You can specify a different entrypoint with -entrypoint otherfunc or 0x123456."
-  echo To set a higher memory requirement, set AFL_MEM=700 for 700mb, default is 500, minimum is 350
+  echo To set memory requirements, set AFL_MEM=700 for 700mb, default is none.
+  echo Options:
+  echo " -forkserver   install a forkserver - you usually want this!"
+  echo " -entrypoint 0xaddr  where to install the forkserver if main() can not be found"
+  echo " -exitpoint 0xaddr   where to terminate the program (for speed)"
+  echo " -alternative  alternate mode, faster, but with lower quality"
   exit 1
 }
 
@@ -21,7 +26,7 @@ test -e ./afl-pin.so && CLIENT=./afl-pin.so
 test -z "$CLIENT" -a -e "/usr/local/lib/pintool/afl-pin.so" && CLIENT=/usr/local/lib/pintool/afl-pin.so
 test -z "$CLIENT" && { echo Error: can not find afl-pin.so either in the current directory nor in /usr/local/lib/pintool ; exit 1 ; }
 
-test -z "$AFL_MEM" && AFL_MEM=500
+test -z "$AFL_MEM" && AFL_MEM=none
 
 AFLPIN=""
 
