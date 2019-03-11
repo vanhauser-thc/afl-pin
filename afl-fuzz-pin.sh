@@ -43,7 +43,7 @@ while [ '!' "$1" = "--" ]; do
   test -z "$OK" && { OPS="$OPS $1" ; shift ; }
 done
 
-sysctl -w kernel.core_pattern="core"
+sysctl -w kernel.core_pattern=core
 sysctl -w kernel.randomize_va_space=0
 echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null
 
