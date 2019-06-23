@@ -10,10 +10,11 @@ but still, afl qemu mode is 5-10x faster than that ...
 
 Installation
 ============
-1. download, compile and install afl => https://github.com/mirrorer/afl
+1. download, compile and install afl => https://github.com/vanhauser-thc/AFLplusplus
 Optional: 2. download, compile and install dyninst => https://github.com/dyninst/dyninst
 Optional: 3. download, compile and install afl-dyninst  => https://github.com/vanhauser-thc/afl-dyninst
-4. download and unpack pin => https://software.intel.com/en-us/articles/pintool-downloads (download 3.6)
+4. download and unpack pin => https://software.intel.com/en-us/articles/pintool-downloads (download 3.6 or 3.7)
+  => NOTE: version 3.10 does not work because the API changed!
 5. export PIN_ROOT=/path/to/pin directory
 6. make a symlink to the afl folder in the afl-pin directory named "afl" , e.g. "ln -s ../afl-2.52b afl"
 7. make
