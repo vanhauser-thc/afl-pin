@@ -1,11 +1,11 @@
 Intro
 =====
 This is the fastest pintool afl-fuzzer out there currently.
-And it runs with pintool 3.6, so 4.x x64 kernels are fine.
+And it runs with pintool 3.6 up to 3.11, so 4.x x64 kernels are fine.
 But ... pintool is super slow.
 So this is basically only if you have no other option.
 I am currently developing an alternative with DynamoRIO and is 10x faster -
-but still, afl qemu mode is 5-10x faster than that ...
+but still, afl qemu mode is 10-50x faster than that ...
 
 
 Installation
@@ -13,10 +13,9 @@ Installation
 1. download, compile and install afl => https://github.com/vanhauser-thc/AFLplusplus
 Optional: 2. download, compile and install dyninst => https://github.com/dyninst/dyninst
 Optional: 3. download, compile and install afl-dyninst  => https://github.com/vanhauser-thc/afl-dyninst
-4. download and unpack pin => https://software.intel.com/en-us/articles/pintool-downloads (download 3.6 or 3.7)
-  => NOTE: version 3.10 does not work because the API changed!
+4. download and unpack pin => https://software.intel.com/en-us/articles/pintool-downloads (download version 3.6 to 3.11)
 5. export PIN_ROOT=/path/to/pin directory
-6. make a symlink to the afl folder in the afl-pin directory named "afl" , e.g. "ln -s ../afl-2.52b afl"
+6. make a symlink to the afl folder in the afl-pin directory named "afl" , e.g. "ln -s ../AFLplusplus afl"
 7. make
 8. make install
 

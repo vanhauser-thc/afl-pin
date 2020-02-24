@@ -18,6 +18,7 @@
   #warn "WARNING: you should use pintool >= 3.6!"
  #endif
 #endif
+using namespace std;
 
 KNOB < BOOL > KnobAlt(KNOB_MODE_WRITEONCE, "pintool", "alternative", "0", "use alternative mode for bb reporting");
 KNOB < BOOL > KnobLibs(KNOB_MODE_WRITEONCE, "pintool", "libs", "0", "also report basic bocks of dynamic libraries");
@@ -42,7 +43,7 @@ static uint8_t *trace_bits = NULL;
 /* ===================================================================== */
 
 INT32 Usage() {
-  cout << "afl-pin (c) 2018-2019 by Marc \"van Hauser\" Heuse <mh@mh-sec.de> AGPL 3.0" << endl;
+  cout << "afl-pin (c) 2018-2020 by Marc \"van Hauser\" Heuse <mh@mh-sec.de> AGPL 3.0" << endl;
   cout << "=====================================================================" << endl;
   cout << " -libs         also report basic bocks of dynamic libraries" << endl;
   cout << " -alternative  report all basic blocks, not only conditional and indirect ones" << endl;

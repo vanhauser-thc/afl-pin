@@ -54,7 +54,8 @@ export AFL_EXIT_WHEN_DONE=1
 #export AFL_TMPDIR=/run/$$
 #export AFL_PRELOAD=./desock.so:./libdislocator/libdislocator.so
 
+test -n "$LOAD" && export PIN_APP_LD_PRELOAD=/usr/local/lib/pintool/forkserver.so
+env|grep _PRELOAD
 echo Running: afl-fuzz -m $AFL_MEM $OPS -- $PIN_ROOT/pin -t "$CLIENT" $AFLPIN $*
 sleep 1
-test -n "$LOAD" && export PIN_APP_LD_PRELOAD=/usr/local/lib/pintool/forkserver.so
 afl-fuzz -m $AFL_MEM $OPS -- $PIN_ROOT/pin -t "$CLIENT" $AFLPIN $*
